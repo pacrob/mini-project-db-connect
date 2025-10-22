@@ -51,11 +51,30 @@ A demo app designed to explain how to connect a Flask app to a database.
 
 7. Hit `http://127.0.0.1:5000/healthz` to confirm the app is running with the configured settings.
 
+## Using the API
+
+With the server running you can interact with the todos endpoints:
+
+- List todos:
+
+  ```bash
+  curl http://127.0.0.1:5000/todos
+  ```
+
+- Create a todo:
+
+  ```bash
+  curl -X POST http://127.0.0.1:5000/todos \
+    -H "Content-Type: application/json" \
+    -d '{"title": "Walk through the code", "description": "Explain the Flask and SQLAlchemy flow"}'
+  ```
+
 ## Project layout
 
 - `app/__init__.py` – Flask application factory and SQLAlchemy instance setup.
 - `app/config.py` – Configuration values the app reads at startup.
 - `app/models.py` – SQLAlchemy models defining the database tables (`Todo`, etc.).
+- `app/routes.py` – Blueprint exposing JSON endpoints for listing and creating todos.
 - `wsgi.py` – Entry point for WSGI servers and the `flask run` command.
 - `.env.example` – Sample environment variables for local development.
 - `requirements.txt` – Python dependencies required by the project.

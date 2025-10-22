@@ -12,6 +12,10 @@ def create_app(config_object: str = "app.config.Config") -> Flask:
     app.config.from_object(config_object)
 
     db.init_app(app)
+
+    from .routes import bp as todos_bp
+
+    app.register_blueprint(todos_bp)
     
     @app.cli.command("init-db")
     def init_db() -> None:
