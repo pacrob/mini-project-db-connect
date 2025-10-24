@@ -69,6 +69,10 @@ With the server running you can interact with the todos endpoints:
     -d '{"title": "Walk through the code", "description": "Explain the Flask and SQLAlchemy flow"}'
   ```
 
+## Web UI
+
+Navigate to `http://127.0.0.1:5000/` to use the HTML interface. It includes a form to add new tasks and a list of existing todos pulled straight from the database.
+
 ## Running tests
 
 Pytest is configured to spin up a temporary SQLite database and exercise the API using Flask's test client:

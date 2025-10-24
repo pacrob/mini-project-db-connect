@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Todo App{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <h2>Create a new task</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('todos.create_todo') }}">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" placeholder="What needs to be done?" required />
+
+      <label for="description">Description <span style="font-weight: normal; opacity: 0.7;">(optional)</span></label>
+      <textarea id="description" name="description" placeholder="Add any extra context for the task."></textarea>
+
+      <button type="submit">Add Task</button>
+    </form>
+  </section>
+
+  <section style="margin-top: 1.5rem;">
+    <h2>Existing tasks</h2>
+    {% if todos %}
+      <ul class="todo-list">
+        {% for todo in todos %}
+          <li>
+            <p class="todo-title">{{ todo.title }}</p>
+            {% if todo.description %}
+              <p class="todo-description">{{ todo.description }}</p>
+            {% endif %}
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; opacity: 0.7;">
+              Created {{ todo.created_at.strftime("%b %d, %Y %I:%M %p %Z") }}
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="empty-state">
+        <p>No tasks yet. Add your first task above!</p>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

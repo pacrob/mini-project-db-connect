@@ -41,3 +41,12 @@ def test_create_todo_requires_non_empty_title(client):
 
     assert response.status_code == 400
     assert response.get_json() == {"error": "Title is required."}
+
+
+def test_index_page_renders_form(client):
+    response = client.get("/")
+
+    assert response.status_code == 200
+    body = response.get_data(as_text=True)
+    assert "Create a new task" in body
+    assert "<form" in body
