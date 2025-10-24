@@ -69,12 +69,21 @@ With the server running you can interact with the todos endpoints:
     -d '{"title": "Walk through the code", "description": "Explain the Flask and SQLAlchemy flow"}'
   ```
 
+## Running tests
+
+Pytest is configured to spin up a temporary SQLite database and exercise the API using Flask's test client:
+
+```bash
+pytest
+```
+
 ## Project layout
 
 - `app/__init__.py` – Flask application factory and SQLAlchemy instance setup.
 - `app/config.py` – Configuration values the app reads at startup.
 - `app/models.py` – SQLAlchemy models defining the database tables (`Todo`, etc.).
 - `app/routes.py` – Blueprint exposing JSON endpoints for listing and creating todos.
+- `tests/` – Pytest suite with fixtures and endpoint coverage.
 - `wsgi.py` – Entry point for WSGI servers and the `flask run` command.
 - `.env.example` – Sample environment variables for local development.
 - `requirements.txt` – Python dependencies required by the project.
