@@ -28,14 +28,32 @@
     {% if todos %}
       <ul class="todo-list">
         {% for todo in todos %}
-          <li>
-            <p class="todo-title">{{ todo.title }}</p>
-            {% if todo.description %}
-              <p class="todo-description">{{ todo.description }}</p>
-            {% endif %}
-            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; opacity: 0.7;">
-              Created {{ todo.created_at.strftime("%b %d, %Y %I:%M %p %Z") }}
-            </p>
+          <li class="{% if todo.is_done %}todo-done{% endif %}">
+            <div class="todo-content">
+              <p class="todo-title">{{ todo.title }}</p>
+              {% if todo.description %}
+                <p class="todo-description">{{ todo.description }}</p>
+              {% endif %}
+              <p class="todo-meta">
+                Created {{ todo.created_at.strftime("%b %d, %Y %I:%M %p %Z") }}
+              </p>
+            </div>
+            <div class="todo-actions">
+              <form method="post" action="{{ url_for('todos.toggle_todo', todo_id=todo.id) }}">
+                <input type="hidden" name="is_done" value="0" />
+                <input
+                  type="checkbox"
+                  name="is_done"
+                  value="1"
+                  {% if todo.is_done %}checked{% endif %}
+                  onchange="this.form.submit()"
+                  aria-label="Mark '{{ todo.title }}' as done"
+                />
+              </form>
+              <form method="post" action="{{ url_for('todos.delete_todo_html', todo_id=todo.id) }}" onsubmit="return confirm('Delete this task?');">
+                <button type="submit" class="delete-button">Delete</button>
+              </form>
+            </div>
           </li>
         {% endfor %}
       </ul>

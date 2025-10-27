@@ -69,9 +69,23 @@ With the server running you can interact with the todos endpoints:
     -d '{"title": "Walk through the code", "description": "Explain the Flask and SQLAlchemy flow"}'
   ```
 
+- Mark a todo done:
+
+  ```bash
+  curl -X PATCH http://127.0.0.1:5000/todos/1 \
+    -H "Content-Type: application/json" \
+    -d '{"is_done": true}'
+  ```
+
+- Delete a todo:
+
+  ```bash
+  curl -X DELETE http://127.0.0.1:5000/todos/1
+  ```
+
 ## Web UI
 
-Navigate to `http://127.0.0.1:5000/` to use the HTML interface. It includes a form to add new tasks and a list of existing todos pulled straight from the database.
+Navigate to `http://127.0.0.1:5000/` to use the HTML interface. It includes a form to add new tasks, checkboxes to mark items complete (with strike-through styling), and delete buttons to remove entries.
 
 ## Running tests
 

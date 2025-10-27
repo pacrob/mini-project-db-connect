@@ -122,6 +122,10 @@
         border-radius: 10px;
         padding: 1rem;
         background: var(--card);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
       }
       .todo-title {
         font-size: 1.1rem;
@@ -131,6 +135,40 @@
       .todo-description {
         margin: 0;
         opacity: 0.85;
+      }
+      .todo-done .todo-title {
+        text-decoration: line-through;
+        opacity: 0.7;
+      }
+      .todo-meta {
+        margin: 0.5rem 0 0 0;
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+      .todo-content {
+        flex: 1;
+      }
+      .todo-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .todo-actions form {
+        margin: 0;
+      }
+      .todo-actions input[type="checkbox"] {
+        width: 1.25rem;
+        height: 1.25rem;
+        cursor: pointer;
+      }
+      .delete-button {
+        background: transparent;
+        color: var(--error);
+        border: 1px solid rgba(220, 38, 38, 0.4);
+        padding: 0.5rem 0.9rem;
+      }
+      .delete-button:hover {
+        background: rgba(220, 38, 38, 0.1);
       }
       .empty-state {
         padding: 2rem;
