@@ -8,10 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class Config:
     """Default configuration for the Flask application."""
 
-    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "DATABASE_URL",
-        "postgresql+psycopg://postgres:postgres@localhost:5432/todo_app",
-    )
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False

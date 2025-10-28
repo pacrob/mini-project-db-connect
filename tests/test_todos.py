@@ -81,7 +81,7 @@ def test_toggle_todo_via_form(client):
 
     response = client.post(
         f"/todos/{todo_id}/toggle",
-        data=[("is_done", "0"), ("is_done", "1")],
+        data={"is_done": ["0","1"]},
         follow_redirects=True,
     )
 
@@ -93,7 +93,7 @@ def test_toggle_todo_via_form(client):
 
     response = client.post(
         f"/todos/{todo_id}/toggle",
-        data=[("is_done", "0")],
+        data={"is_done": ["0"]},
         follow_redirects=True,
     )
 

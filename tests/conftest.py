@@ -10,8 +10,8 @@ def app(tmp_path):
     database_path = tmp_path / "test.db"
     uri = f"sqlite+pysqlite:///{database_path}"
 
-    previous = os.environ.get("DATABASE_URL")
     os.environ["DATABASE_URL"] = uri
+    os.environ["SECRET_KEY"] = "test-secret-key"
 
     app = create_app()
     app.config.update(
@@ -27,10 +27,7 @@ def app(tmp_path):
         db.session.remove()
         db.drop_all()
         db.engine.dispose()
-        if previous is not None:
-            os.environ["DATABASE_URL"] = previous
-        else:
-            os.environ.pop("DATABASE_URL", None)
+        os.environ.pop("DATABASE_URL", None)
 
 
 @pytest.fixture
